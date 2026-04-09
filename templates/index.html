@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Secure Flask Application{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Secure Flask Application</h1>
+
+<div class="row mt-5">
+    <div class="col-md-8 mx-auto">
+        <h2 class="mb-4">Lab-07: Implementing 5 Security Practices</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Security Features Implemented:</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>1. Secure Input Handling</strong><br>
+                        <small>Forms use Flask-WTF validators to prevent SQL injection and XSS attacks. All input is validated before processing.</small>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>2. Parameterized Queries</strong><br>
+                        <small>SQLAlchemy ORM automatically uses parameterized queries to prevent SQL injection attacks.</small>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>3. CSRF Protection & Session Management</strong><br>
+                        <small>CSRF tokens in all forms, secure HTTP-only cookies, and proper session timeout configuration.</small>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>4. Secure Error Handling</strong><br>
+                        <small>Custom error pages that don't expose sensitive information like stack traces or file paths.</small>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>5. Secure Password Storage</strong><br>
+                        <small>All passwords are hashed using bcrypt before storage in the database.</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Get Started</h5>
+                <p>Create an account or log in to access the secure dashboard:</p>
+                {% if 'user_id' not in session %}
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Create Account</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-secondary btn-lg">Login</a>
+                {% else %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">About This Application</h5>
+                <p>This is a demonstration of secure coding practices following OWASP guidelines. The application includes:</p>
+                <ul>
+                    <li>User registration and authentication</li>
+                    <li>Secure session management</li>
+                    <li>Input validation and sanitization</li>
+                    <li>Protected error handling</li>
+                    <li>Encrypted password storage</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

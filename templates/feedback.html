@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Feedback - Secure Flask Application{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-8 mx-auto">
+        <h2>Share Your Feedback</h2>
+        <p class="text-muted">Help us improve this secure application by providing feedback</p>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control is-invalid") }}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.title.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.title(class="form-control") }}
+                            <small class="form-text text-muted">
+                                3-100 characters
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.message.label(class="form-label") }}
+                        {% if form.message.errors %}
+                            {{ form.message(class="form-control is-invalid", rows=6) }}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.message.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.message(class="form-control", rows=6, placeholder="Enter your feedback here...") }}
+                            <small class="form-text text-muted">
+                                5-500 characters. All input is validated to prevent malicious content.
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <h6>Security Measures on This Form:</h6>
+            <ul class="mb-0 small">
+                <li><strong>Input Validation:</strong> All text is validated for length and format</li>
+                <li><strong>XSS Prevention:</strong> Special characters are properly sanitized</li>
+                <li><strong>CSRF Protection:</strong> Form includes a unique CSRF token</li>
+                <li><strong>Parameterized Queries:</strong> Data is safely stored using SQLAlchemy</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

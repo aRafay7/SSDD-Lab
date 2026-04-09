@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-8 mx-auto text-center">
+        <div class="card">
+            <div class="card-body">
+                <h1 style="font-size: 72px; color: #667eea;">404</h1>
+                <h2 class="mb-4">Oops! Page Not Found</h2>
+                <p class="lead">The page you're looking for doesn't exist or has been moved.</p>
+                
+                <hr>
+                
+                <p class="text-muted">Here are some helpful links instead:</p>
+                <div class="mt-4">
+                    <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg me-2">Go Home</a>
+                    {% if 'user_id' in session %}
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-lg">Go to Dashboard</a>
+                    {% else %}
+                        <a href="{{ url_for('register') }}" class="btn btn-secondary btn-lg">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <h6>Security Note:</h6>
+            <p class="mb-0 small">
+                Task 4: Secure Error Handling - This error page does not expose sensitive information such as stack traces, file paths, or system details.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

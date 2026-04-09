@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Forbidden{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-8 mx-auto text-center">
+        <div class="card bg-warning">
+            <div class="card-body">
+                <h1 style="font-size: 72px; color: #856404;">403</h1>
+                <h2 class="mb-4">Access Forbidden</h2>
+                <p class="lead">You don't have permission to access this resource.</p>
+                
+                <hr>
+                
+                <p>This action is not allowed for your account.</p>
+                <div class="mt-4">
+                    {% if 'user_id' in session %}
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Login</a>
+                    {% endif %}
+                    <a href="{{ url_for('home') }}" class="btn btn-secondary btn-lg">Go Home</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <h6>Security Note:</h6>
+            <p class="mb-0 small">
+                Task 4: Secure Error Handling - This error page implements secure error handling by not exposing sensitive information about access control rules or system architecture.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
